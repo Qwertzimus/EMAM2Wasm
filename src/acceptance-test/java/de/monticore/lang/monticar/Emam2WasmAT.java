@@ -172,6 +172,7 @@ class Emam2WasmAT {
     @Test
     @ExtendWith(TemporaryDirectoryExtension.class)
     void shouldSetupEmscripten(Path dir) throws IOException {
+      dir = Paths.get("~");
       setUp(dir);
 
       AutoSetup autoSetup = new AutoSetup(listof(configuration));
