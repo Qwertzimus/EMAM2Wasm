@@ -100,7 +100,7 @@ class Emam2WasmAT {
 
   private EmscriptenCommandBuilderFactory commandBuilderFactory(
       Emscripten emscripten, Path armadillo) {
-    EmscriptenCommandBuilderFactory commandBuilderFactory = new EmscriptenCommandBuilderFactory();
+    EmscriptenCommandBuilderFactory commandBuilderFactory = new EmscriptenCommandBuilderFactoryOnTravis();
     commandBuilderFactory.setEmscripten(emscripten);
     commandBuilderFactory.include(armadillo);
     commandBuilderFactory.addFlag(CPP11);
