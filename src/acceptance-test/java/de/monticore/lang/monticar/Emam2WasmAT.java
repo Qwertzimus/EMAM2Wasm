@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -214,6 +215,7 @@ class Emam2WasmAT {
     }
   }
 
+  @Disabled
   @Nested
   @EnabledOnOs({OS.WINDOWS})
   class WhenWindowsOS {
