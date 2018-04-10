@@ -1,0 +1,12 @@
+package models;
+
+component Add {
+  ports
+    in Q in1,
+	in Q in2,
+	out Q sum;
+
+  implementation Math {
+	sum = in1 + in2;
+  }
+}
