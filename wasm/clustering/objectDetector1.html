@@ -136,7 +136,9 @@
 <script>
   var url_string = window.location.href;
   var url = new URL(url_string);
+  if (url.has("imgFront")) {
     document.getElementById("inport-field-imgFront").value = url.searchParams.get("imgFront");
+  }
 
   function exec() {
     clearOutportFields();
