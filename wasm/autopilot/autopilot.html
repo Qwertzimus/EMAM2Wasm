@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en-us">
+<style>
+  .model {
+    overflow: hidden;
+    width: fit-content;
+  }
+  .ports {
+    overflow: hidden;
+  }
+  .inports {
+    float: left;
+    margin: 10px;
+  }
+  .outports {
+    float: left;
+    margin: 10px;
+  }
+
+  .header {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  .type {
+    width: max-content;
+    margin: 2px 15px 2px 2px;
+    color: grey;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10px;
+  }
+  .button {
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100px;
+  }
+  #reset {
+    background-color: #d22b23;
+  }
+  #execute {
+    background-color: #24d231;
+  }
+  .error {
+    color: red;
+    margin: 10px;
+  }
+
+  textarea {
+    height: 1em;
+    width: 200px;
+    padding: 3px;
+  }
+</style>
+<head>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/4.0.1/math.min.js"></script>
+  <script type="text/javascript" src="autopilot_wrapper.js"></script>
+  <script type="text/javascript" src="autopilot.js"></script>
+  <title>Autopilot</title>
+</head>
+<body>
+<div class="container">
+  <div class="model">
+    <div class="header">
+      <h2>Autopilot</h2>
+    </div>
+    <div class="ports">
+      <div class="inports">
+        <div class="header">
+          <h3>Inports</h3>
+        </div>
+        <table>
+          <tr>
+            <td>
+              <div class="type">Q (0.0 s : 0.001 s : 1.0 s)</div>
+            </td>
+            <td>
+              <div class="label">
+                timeIncrement:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-timeIncrement"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (0.0 m/s : 0.01 m/s : oo m/s)</div>
+            </td>
+            <td>
+              <div class="label">
+                currentVelocity:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-currentVelocity"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (-oo m : 0.01 m : oo m)</div>
+            </td>
+            <td>
+              <div class="label">
+                x:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-x"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (-oo m : 0.01 m : oo m)</div>
+            </td>
+            <td>
+              <div class="label">
+                y:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-y"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (-oo : 0.001 : oo)</div>
+            </td>
+            <td>
+              <div class="label">
+                compass:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-compass"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (0.0 : 0.001 : 2.5)</div>
+            </td>
+            <td>
+              <div class="label">
+                currentEngine:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-currentEngine"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (-0.785 : 0.001 : 0.785)</div>
+            </td>
+            <td>
+              <div class="label">
+                currentSteering:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-currentSteering"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (0.0 : 0.001 : 3.0)</div>
+            </td>
+            <td>
+              <div class="label">
+                currentBrakes:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-currentBrakes"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Z (0 : 100)</div>
+            </td>
+            <td>
+              <div class="label">
+                trajectory_length:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-trajectory_length"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (-oo m : 0.01 m : oo m)^{1, 100}</div>
+            </td>
+            <td>
+              <div class="label">
+                trajectory_x:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-trajectory_x"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (-oo m : 0.01 m : oo m)^{1, 100}</div>
+            </td>
+            <td>
+              <div class="label">
+                trajectory_y:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="inport-field-trajectory_y"></textarea>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="outports">
+        <div class="header">
+          <h3>Outports</h3>
+        </div>
+        <table>
+          <tr>
+            <td>
+              <div class="type">Q (0.0 : 0.001 : 2.5)</div>
+            </td>
+            <td>
+              <div class="label">
+                engine:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="outport-field-engine" readonly></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (-0.785 : 0.001 : 0.785)</div>
+            </td>
+            <td>
+              <div class="label">
+                steering:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="outport-field-steering" readonly></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="type">Q (0.0 : 0.001 : 3.0)</div>
+            </td>
+            <td>
+              <div class="label">
+                brakes:
+              </div>
+            </td>
+            <td>
+              <div class="field">
+                <textarea id="outport-field-brakes" readonly></textarea>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="buttons">
+      <div class="reset">
+        <button class="button" id="reset" onclick="reset()">Reset</button>
+      </div>
+      <div class="execute">
+        <button class="button" id="execute" onclick="exec()">Execute</button>
+      </div>
+    </div>
+  </div>
+  <div class="error" id="error"></div>
+</div>
+
+<script>
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+    document.getElementById("inport-field-timeIncrement").value = url.searchParams.get("timeIncrement");
+    document.getElementById("inport-field-currentVelocity").value = url.searchParams.get("currentVelocity");
+    document.getElementById("inport-field-x").value = url.searchParams.get("x");
+    document.getElementById("inport-field-y").value = url.searchParams.get("y");
+    document.getElementById("inport-field-compass").value = url.searchParams.get("compass");
+    document.getElementById("inport-field-currentEngine").value = url.searchParams.get("currentEngine");
+    document.getElementById("inport-field-currentSteering").value = url.searchParams.get("currentSteering");
+    document.getElementById("inport-field-currentBrakes").value = url.searchParams.get("currentBrakes");
+    document.getElementById("inport-field-trajectory_length").value = url.searchParams.get("trajectory_length");
+    document.getElementById("inport-field-trajectory_x").value = url.searchParams.get("trajectory_x");
+    document.getElementById("inport-field-trajectory_y").value = url.searchParams.get("trajectory_y");
+
+  function exec() {
+    clearOutportFields();
+    clearErrors();
+
+    try {
+      setTimeIncrement(document.getElementById("inport-field-timeIncrement").value);
+      setCurrentVelocity(document.getElementById("inport-field-currentVelocity").value);
+      setX(document.getElementById("inport-field-x").value);
+      setY(document.getElementById("inport-field-y").value);
+      setCompass(document.getElementById("inport-field-compass").value);
+      setCurrentEngine(document.getElementById("inport-field-currentEngine").value);
+      setCurrentSteering(document.getElementById("inport-field-currentSteering").value);
+      setCurrentBrakes(document.getElementById("inport-field-currentBrakes").value);
+      setTrajectory_length(document.getElementById("inport-field-trajectory_length").value);
+      setTrajectory_x(document.getElementById("inport-field-trajectory_x").value);
+      setTrajectory_y(document.getElementById("inport-field-trajectory_y").value);
+
+      execute();
+
+      document.getElementById("outport-field-engine").value = getEngine();
+      document.getElementById("outport-field-steering").value = getSteering();
+      document.getElementById("outport-field-brakes").value = getBrakes();
+    }
+    catch (err) {
+      if (err.message === undefined) {
+        document.getElementById("error").innerText = err;
+      }
+      else {
+        document.getElementById("error").innerHTML = err.message;
+      }
+    }
+  }
+
+  function reset() {
+    init();
+    clearInportFields();
+    clearOutportFields();
+    clearErrors();
+  }
+
+  function clearInportFields() {
+    document.getElementById("inport-field-timeIncrement").value = "";
+    document.getElementById("inport-field-currentVelocity").value = "";
+    document.getElementById("inport-field-x").value = "";
+    document.getElementById("inport-field-y").value = "";
+    document.getElementById("inport-field-compass").value = "";
+    document.getElementById("inport-field-currentEngine").value = "";
+    document.getElementById("inport-field-currentSteering").value = "";
+    document.getElementById("inport-field-currentBrakes").value = "";
+    document.getElementById("inport-field-trajectory_length").value = "";
+    document.getElementById("inport-field-trajectory_x").value = "";
+    document.getElementById("inport-field-trajectory_y").value = "";
+  }
+
+  function clearOutportFields() {
+    document.getElementById("outport-field-engine").value = "";
+    document.getElementById("outport-field-steering").value = "";
+    document.getElementById("outport-field-brakes").value = "";
+  }
+
+  function clearErrors() {
+    document.getElementById("error").innerHTML = "";
+  }
+</script>
+</body>
+</html>

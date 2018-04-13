@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-us">
+<style>
+  .description {
+    margin: 20px;
+    width: fit-content;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    width: fit-content;
+  }
+
+  .link {
+    margin: 2px;
+    flex-grow: 1;
+  }
+
+  .button {
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    background-color: #1b7df1;
+  }
+</style>
+<head>
+  <title>Example Models</title>
+</head>
+<body>
+<div class="description">
+  Try one of the example models:
+</div>
+<div class="container">
+  <div class="link">
+    <input type="button" class="button" onclick="location.href='wasm/autoPilot/autoPilot.html';" value="AutoPilot" />
+  </div>
+  <div class="link">
+    <input type="button" class="button" onclick="location.href='wasm/clustering/objectDetector1.html';" value="ObjectDetector1" />
+  </div>
+  <div class="link">
+    <input type="button" class="button" onclick="location.href='wasm/matrices/matrices.html';" value="Matrices" />
+  </div>
+  <div class="link">
+    <input type="button" class="button" onclick="location.href='wasm/counter/counter.html';" value="Counter" />
+  </div>
+  <div class="link">
+    <input type="button" class="button" onclick="location.href='wasm/add/add.html';" value="Add" />
+  </div>
+  <div class="link">
+    <input type="button" class="button" onclick="location.href='wasm/scalar/scalar.html';" value="Scalar" />
+  </div>
+</div>
+</body>
+</html>
